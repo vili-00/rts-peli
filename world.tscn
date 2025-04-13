@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://syitjs03vshp"]
+[gd_scene load_steps=6 format=3 uid="uid://syitjs03vshp"]
 
 [ext_resource type="Script" uid="uid://d0smpenwo77vp" path="res://UI/camera.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://tqocc47qf28" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cusm14sohg3t8" path="res://Unit.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://cm521dvj54bqo" path="res://objects/tree.tscn" id="4_aqk2v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fwl4"]
 bg_color = Color(0.298364, 0.60806, 1, 1)
@@ -24,3 +25,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2fwl4")
 
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("2_fj7yv")]
 position = Vector2(557, 339)
+
+[node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("2_fj7yv")]
+position = Vector2(410, 330)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Tree" parent="Objects" instance=ExtResource("4_aqk2v")]
+position = Vector2(550, 176)
+
+[node name="Tree2" parent="Objects" instance=ExtResource("4_aqk2v")]
+position = Vector2(320, 239)
+
+[node name="Tree3" parent="Objects" instance=ExtResource("4_aqk2v")]
+position = Vector2(718, 240)

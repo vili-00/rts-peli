@@ -25,7 +25,7 @@ func _process(delta):
 		draw_area()
 		
 	if Input.is_action_just_released("LeftClick"):
-		if startV.distance_to(mousePos) > 20:
+		if startV.distance_to(mousePos) > 10:
 			end = mousePosGlobal
 			endV = mousePos
 			isDragging = false

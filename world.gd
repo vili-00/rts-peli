@@ -32,8 +32,7 @@ func get_units_in_area(area):
 	var u = []
 	print("asw")
 	for unit in units:
-		if unit.position.x > area[0].x and unit.position.x < area[1].y:
-			print("1")
+		if unit.position.x > area[0].x and unit.position.x < area[1].x:
 			if unit.position.y > area[0].y and unit.position.y < area[1].y:
 				u.append(unit)
 				print("2")
