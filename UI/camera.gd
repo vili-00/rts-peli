@@ -9,7 +9,10 @@ var pos = Vector2()
 var isDragging = false
 signal area_selected
 signal start_move_selection
+@onready var selectionBox = get_node("../UI/Panel")
 
+func _ready():
+	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
 func _process(delta):
 	if Input.is_action_just_pressed("LeftClick"):
 		start = mousePosGlobal
@@ -27,7 +30,7 @@ func _process(delta):
 			endV = mousePos
 			isDragging = false
 			draw_area(false)
-			emit_signal("area_selected")
+			emit_signal("area_selected", self)
 		else:
 			end = start
 			isDragging = false
@@ -39,8 +42,12 @@ func _input(event):
 		mousePosGlobal = get_global_mouse_position()
 
 func draw_area(s=true):
-	get_node("../Panel").size = Vector2(abs(startV.x - endV.x), abs(startV.y - endV.y))
+	selectionBox.size = Vector2(abs(startV.x - endV.x), abs(startV.y - endV.y))
 	pos.x = min(startV.x, endV.x)
 	pos.y = min(startV.y, endV.y)
-	get_node("../Panel").position = pos
-	get_node("../Panel").size *= int(s)
+	selectionBox.position = pos
+	selectionBox.size *= int(s)
+	
+
+
+	
