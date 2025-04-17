@@ -24,27 +24,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2fwl4")
 [node name="Units" type="Node2D" parent="."]
 
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("2_fj7yv")]
-position = Vector2(661, 358)
+position = Vector2(539, 304)
 
 [node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("2_fj7yv")]
-position = Vector2(265, 293)
+position = Vector2(410, 330)
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Tree" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(388, 118)
+position = Vector2(550, 176)
 
 [node name="Tree2" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(71, 487)
+position = Vector2(320, 239)
 
 [node name="Tree3" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(1050, 153)
-
-[node name="Tree4" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(659, 131)
-
-[node name="Tree5" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(137, 127)
-
-[node name="Tree6" parent="Objects" instance=ExtResource("4_aqk2v")]
-position = Vector2(782, 516)
+position = Vector2(718, 240)

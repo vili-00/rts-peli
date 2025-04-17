@@ -27,7 +27,7 @@ func _physics_process(delta):
 			target = get_global_mouse_position()
 			animated_sprite.play("walking_3")
 	velocity = position.direction_to(target) *speed
-	if position.distance_to(target) > 15:
+	if position.distance_to(target) > 10:
 		move_and_slide()
 	else:
 		animated_sprite.stop()
