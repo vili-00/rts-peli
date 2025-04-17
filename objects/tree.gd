@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var totalTime = 5
-var currentTime
+var currentTime = totalTime
 var units = 0 
 @onready var bar = $ProgressBar
 @onready var timer = $Timer
@@ -9,11 +9,12 @@ var units = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	currentTime = totalTime
-	bar.max_value =totalTime
+	bar.max_value = totalTime
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	bar.value = currentTime
 	if currentTime <= 0:
 		treeChopped()
 
@@ -29,11 +30,11 @@ func _on_chop_area_body_exited(body: Node2D) -> void:
 
 
 func _on_timer_timeout() -> void:
-	pass # Replace with function body.
+	currentTime -= 1+units
 
 func startChopping():
 	timer.start()
-	print("started")
+	bar.show()
 	
 func treeChopped():
 	queue_free()
