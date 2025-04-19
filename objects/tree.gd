@@ -26,7 +26,10 @@ func _on_chop_area_body_entered(body: Node2D) -> void:
 
 
 func _on_chop_area_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.
+		if "Unit" in body.name:
+			units -= 1
+		if units <= 0:
+			timer.stop()
 
 
 func _on_timer_timeout() -> void:
@@ -37,4 +40,5 @@ func startChopping():
 	bar.show()
 	
 func treeChopped():
+	Game.wood += 1
 	queue_free()
