@@ -1,4 +1,11 @@
 extends Camera2D
+
+@export var speed = 15
+@export var zoom_speed = 20.0
+@export var zoom_margin = 0.1
+@export var zoom_min = 0.5
+@export var zoom_max = 3.0
+
 var mousePos = Vector2()
 var mousePosGlobal = Vector2() 
 var start = Vector2()
@@ -14,6 +21,13 @@ signal start_move_selection
 func _ready():
 	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
 func _process(delta):
+	var inputX = int(Input.is_action_pressed("Ui_Right")) - int(Input.is_action_pressed("Ui_Left"))
+	var inputY =  int(Input.is_action_pressed("Ui_Down")) - int(Input.is_action_pressed("Ui_Up"))
+	
+	position.x = lerp(position.x, position.x + inputX*speed*zoom.x, speed*delta)
+	position.y = lerp(position.y, position.y + inputY*speed*zoom.x, speed*delta)
+	
+	
 	if Input.is_action_just_pressed("LeftClick"):
 		start = mousePosGlobal
 		startV = mousePos
