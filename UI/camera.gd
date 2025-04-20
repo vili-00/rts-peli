@@ -25,7 +25,7 @@ func _process(delta):
 	var inputY =  int(Input.is_action_pressed("Ui_Down")) - int(Input.is_action_pressed("Ui_Up"))
 	
 	position.x = lerp(position.x, position.x + inputX*speed*zoom.x, speed*delta)
-	position.y = lerp(position.y, position.y + inputY*speed*zoom.x, speed*delta)
+	position.y = lerp(position.y, position.y + inputY*speed*zoom.y, speed*delta)
 	
 	
 	if Input.is_action_just_pressed("LeftClick"):
