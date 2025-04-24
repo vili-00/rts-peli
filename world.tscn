@@ -15,7 +15,7 @@ offset_bottom = 648.0
 color = Color(1.29953e-06, 0.545258, 9.62615e-08, 1)
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+offset = Vector2(575, 325.47)
 script = ExtResource("1_f3sb7")
 
 [node name="Units" type="Node2D" parent="."]
