@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://mfdd2eqywgno"]
+
+[ext_resource type="Script" uid="uid://oelem17y375q" path="res://buildings/barracks.gd" id="1_p1778"]
+[ext_resource type="Texture2D" uid="uid://7i2ll34lyh0u" path="res://assets/barracks.png" id="2_chnri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htohi"]
+size = Vector2(75, 68)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvdn7"]
+bg_color = Color(0.0745098, 0.643137, 0.901961, 0)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.258475, 0.888637, 1, 1)
+
+[node name="Barracks" type="StaticBody2D"]
+script = ExtResource("1_p1778")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -34)
+shape = SubResource("RectangleShape2D_htohi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -35)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_chnri")
+
+[node name="SelectionBox" type="Panel" parent="."]
+visible = false
+offset_left = -44.0
+offset_top = -72.0
+offset_right = 45.0
+offset_bottom = 5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvdn7")

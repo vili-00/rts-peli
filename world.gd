@@ -15,6 +15,7 @@ func _process(delta):
 	pass
 
 func _on_area_selected(object):
+	units = get_tree().get_nodes_in_group("units")
 	var start = object.start
 	var end = object.end
 	var area = []

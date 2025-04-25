@@ -5,10 +5,11 @@ extends CharacterBody2D
 @onready var box = get_node("Box")
 @onready var target = position
 var follow_cursor = false
-var speed = 50
+var speed = 70
 
 func _ready():
 	animated_sprite.play("walking_3")
+	add_to_group("units", true)
 
 func set_selected(value):
 	box.visible = value
