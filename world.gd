@@ -5,17 +5,15 @@ var units = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	units = get_tree().get_nodes_in_group("units")
+	get_units()
 	print(units)
 	
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func _on_area_selected(object):
-	units = get_tree().get_nodes_in_group("units")
+	get_units()
 	var start = object.start
 	var end = object.end
 	var area = []
@@ -31,10 +29,15 @@ func _on_area_selected(object):
 
 func get_units_in_area(area):
 	var u = []
-	print("asw")
+	print("get units in area")
 	for unit in units:
 		if unit.position.x > area[0].x and unit.position.x < area[1].x:
 			if unit.position.y > area[0].y and unit.position.y < area[1].y:
 				u.append(unit)
-				print("2")
+				print("success")
 	return u
+
+func get_units():
+	units = null
+	units = get_tree().get_nodes_in_group("units")
+	

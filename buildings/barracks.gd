@@ -1,20 +1,38 @@
 extends StaticBody2D
 
 var mouseOvelap = false
-@onready var select = get_node("SelectionBox")
 var selection = false
-@export var selected = false
-@onready var box = get_node("Box")
+var spawnMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	spawnMenu = get_node("/root/SpawnMenu")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func set_selected(value):
-	box.visible = value
-	selected = value
+
+func _on_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("LeftClick"):
+		if mouseOvelap:
+			selection = !selection
+			if selection:
+				spawnMenu.showMenu(position)
+				print("mouseovelap spawn units")
+				spawnMenu.spawnUnit(position)
+				
+		if !mouseOvelap:
+			selection = false
+
+
+
+
+func _on_mouse_entered() -> void:
+	print("overlap")
+	mouseOvelap = true
+
+
+func _on_mouse_exited() -> void:
+	mouseOvelap = false

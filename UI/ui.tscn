@@ -14,3 +14,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2fwl4")
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 100.0
+offset_right = 140.0
+offset_bottom = 23.0
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 23.0
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 300.0
+offset_right = 340.0
+offset_bottom = 23.0
