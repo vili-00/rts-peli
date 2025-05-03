@@ -7,26 +7,38 @@ var rng = RandomNumberGenerator.new()
 # State for placement
 var placing_unit_type: PackedScene = null
 var placing: bool = false
+var ghost: Node2D = null   # will hold our preview instance
 
 func _ready() -> void:
 	rng.randomize()
 
-
+func _process(delta: float) -> void:
+	if placing and ghost:
+		ghost.position = get_global_mouse_position()
 # Call this from your building script, passing screen coords (Vector2)
 func show_menu(menu_pos: Vector2) -> void:
 	position = menu_pos
 	visible = true
 	placing = false
 	placing_unit_type = null
+	if ghost:
+		ghost.queue_free()
+		ghost = null
 
+func _start_placing(sc: PackedScene) -> void: 
+	placing_unit_type = sc
+	placing = true
+
+	# instantiate the ghost and make it semi-transparent
+	ghost = sc.instantiate()
+	ghost.modulate = Color(1,1,1,0.5)
+	var world = get_tree().root.get_node("World")
+	world.add_child(ghost)
+	#add_child(ghost)
 # Button signal: pick “soldier” to place
 
-# You can add more buttons: Worker, Ranged, etc., same pattern
-# func _on_Button_Worker_pressed() -> void:
-#     placing_unit_type = worker_scene; placing = true; visible = false
-
 # Catch the next click anywhere
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not placing:
 		return
 
@@ -37,8 +49,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var world_pos = get_global_mouse_position()
 
 		# 2) actually spawn the unit
-		_spawn_unit(placing_unit_type, world_pos)
-
+		#_spawn_unit(placing_unit_type, world_pos)
+		_finalize_placement(world_pos)
 		# 3) reset state
 		placing = false
 		placing_unit_type = null
@@ -65,5 +77,26 @@ func _on_button_5_pressed() -> void:
 
 
 func _on_button_7_pressed() -> void:
+	_start_placing(barracks_scene)
 	placing_unit_type = barracks_scene
 	placing = true
+
+func _finalize_placement(at_pos: Vector2) -> void:
+	# 1) remove the ghost
+	if ghost:
+		ghost.queue_free()
+		ghost = null
+
+	# 2) instantiate the real unit/building
+	var inst = placing_unit_type.instantiate()
+	inst.position = at_pos  # you can still add your random offset here
+
+	# 3) parent under the right container
+	var parent_path = "Buildings" if placing_unit_type == barracks_scene else "Units"
+	
+	var container = get_tree().current_scene.get_node(parent_path)
+	container.add_child(inst)
+
+	# 4) reset placement state
+	placing = false
+	placing_unit_type = null
