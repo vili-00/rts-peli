@@ -14,8 +14,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if placing and ghost:
-		ghost.position = get_global_mouse_position()
-# Call this from your building script, passing screen coords (Vector2)
+		var mouse_world = get_global_mouse_position()
+		ghost.global_position = ghost.get_global_mouse_position()
+
 func show_menu(menu_pos: Vector2) -> void:
 	position = menu_pos
 	visible = true
@@ -34,8 +35,6 @@ func _start_placing(sc: PackedScene) -> void:
 	ghost.modulate = Color(1,1,1,0.5)
 	var world = get_tree().root.get_node("World")
 	world.add_child(ghost)
-	#add_child(ghost)
-# Button signal: pick “soldier” to place
 
 # Catch the next click anywhere
 func _input(event: InputEvent) -> void:
@@ -43,31 +42,10 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if Input.is_action_just_pressed("LeftClick"):
-	
-		# 1) compute world position from screen click
-		var cam = get_viewport().get_camera_2d()
-		var world_pos = get_global_mouse_position()
-
-		# 2) actually spawn the unit
-		#_spawn_unit(placing_unit_type, world_pos)
+		var world_pos = ghost.global_position
 		_finalize_placement(world_pos)
-		# 3) reset state
 		placing = false
 		placing_unit_type = null
-
-# Your existing spawn logic, slightly refactored
-func _spawn_unit(scene: PackedScene, at_pos: Vector2) -> void:
-	var unit = scene.instantiate()
-	# add a small random offset
-	var rx = rng.randf_range(-20.0, 20.0)
-	var ry = rng.randf_range(-100.0, -50.0)
-	unit.position = at_pos + Vector2(rx, ry)
-
-	#if Game.wood > 0:
-	var units_parent = get_tree().root.get_node("World/Units")
-	units_parent.add_child(unit)
-	get_tree().root.get_node("World").get_units()
-	print("Spawned at ", unit.position)
 
 
 func _on_button_5_pressed() -> void:

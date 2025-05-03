@@ -20,10 +20,6 @@ scale = Vector2(1.16313, 1.45037)
 mouse_filter = 1
 color = Color(1.29953e-06, 0.545258, 9.62615e-08, 1)
 
-[node name="Camera" type="Camera2D" parent="."]
-offset = Vector2(575, 325.47)
-script = ExtResource("1_f3sb7")
-
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -75,6 +71,10 @@ position = Vector2(403, 253)
 
 [node name="Barracks2" parent="Buildings" instance=ExtResource("6_dwbse")]
 position = Vector2(714, 283)
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(575, 325.47)
+script = ExtResource("1_f3sb7")
 
 [connection signal="mouse_entered" from="Buildings/Barracks" to="." method="_on_barracks_mouse_entered"]
 [connection signal="mouse_entered" from="Buildings/Barracks2" to="." method="_on_barracks_mouse_entered"]
