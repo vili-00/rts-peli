@@ -15,7 +15,7 @@ func _process(delta):
 func _on_area_selected(object):
 	get_units()
 	var start = object.start
-	var end = object.endwa
+	var end = object.end
 	var area = []
 	area.append(Vector2(min(start.x, end.x), min(start.y, end.y)))
 	area.append(Vector2(max(start.x, end.x), max(start.y, end.y)))
