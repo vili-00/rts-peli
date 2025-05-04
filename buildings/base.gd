@@ -1,17 +1,25 @@
 extends StaticBody2D
 
+@onready var bar = $ProgressBar
 var mouseOvelap = false
 var selection = false
 var spawnMenu
+var health = 500
+var team = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawnMenu = get_node("/root/SpawnMenu")
+	bar.max_value = health
+	add_to_group("buildings", true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	bar.value = health
+	if health < 1:
+		Game.base_destroyed = team
+		queue_free()
 
 
 func _on_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:

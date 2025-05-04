@@ -20,6 +20,10 @@ config/icon="res://assets/icon.svg"
 Game="*res://Global/game.gd"
 SpawnMenu="*res://Global/spawn_menu.gd"
 
+[global_group]
+
+buildings=""
+
 [input]
 
 LeftClick={

@@ -113,7 +113,7 @@ border_width_bottom = 5
 border_color = Color(0.258475, 0.888637, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ciyvu"]
-radius = 255.227
+radius = 217.009
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac4il"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)

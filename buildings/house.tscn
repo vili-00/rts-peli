@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfjpwgtqrbami"]
+[gd_scene load_steps=6 format=3 uid="uid://bfjpwgtqrbami"]
 
 [ext_resource type="Script" uid="uid://di60bw2bwsbtw" path="res://buildings/house.gd" id="1_j2dgx"]
 [ext_resource type="Texture2D" uid="uid://nc61unppthoy" path="res://assets/house.png" id="2_pv5vd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_htohi"]
 size = Vector2(57, 18)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2dgx"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv5vd"]
+bg_color = Color(0, 0.483338, 0.854956, 1)
 
 [node name="House" type="StaticBody2D"]
 input_pickable = true
@@ -18,6 +24,15 @@ shape = SubResource("RectangleShape2D_htohi")
 position = Vector2(1, -41)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_pv5vd")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -90.0
+offset_right = 25.0
+offset_bottom = -83.0
+theme_override_styles/background = SubResource("StyleBoxFlat_j2dgx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pv5vd")
+show_percentage = false
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

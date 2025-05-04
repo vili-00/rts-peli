@@ -75,6 +75,7 @@ func _finalize_placement(at_pos: Vector2) -> void:
 	var container = get_tree().current_scene.get_node(parent_path)
 	container.add_child(inst)
 
+
 	# 4) reset placement state
 	placing = false
 	placing_unit_type = null

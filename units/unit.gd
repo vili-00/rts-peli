@@ -9,7 +9,7 @@ var follow_cursor = false
 var speed = 70
 var currentHealth
 
-var target_unit: CharacterBody2D = null
+var target_unit = null
 var health = 100
 var attacking := false 
 var team = 1
@@ -41,21 +41,21 @@ func _physics_process(delta):
 			target = get_global_mouse_position()
 			animated_sprite.play("walking_3")
 	velocity = position.direction_to(target) *speed
-	if position.distance_to(target) > 10:
+	if position.distance_to(target) > 40:
 		move_and_slide()
 	else:
 		animated_sprite.stop()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("units") and body != self:
+func _on_area_2d_body_entered(body) -> void:
+	if body.is_in_group("units") or body.is_in_group("buildings") and body != self:
 		if body.team != team:
-			target_unit = body as CharacterBody2D
+			target_unit = body 
 			if not attacking:
 				attacking = true
 				attack_loop()
 		
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_area_2d_body_exited(body) -> void:
 	if body == target_unit:
 		target_unit = null  
 
