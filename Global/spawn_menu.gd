@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var unit = preload("res://units/Unit.tscn")
+@onready var ranged_unit = preload("res://units/ranged_unit.tscn")
+@onready var villager = preload("res://units/villager.tscn")
 var buildingPosition = Vector2(100,100)
 
 var rng = RandomNumberGenerator.new()
@@ -23,12 +25,12 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	spawnUnit(buildingPosition)
+	spawnVillager(buildingPosition)
 	
 	
 
 func _on_button_3_pressed() -> void:
-	spawnUnit(buildingPosition)
+	spawnUnitRanged(buildingPosition)
 
 
 func _on_button_4_pressed() -> void:
@@ -40,6 +42,7 @@ func spawnUnit(spawnPosition):
 	print(spawnPosition)
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
 	var createdUnit = unitType.instantiate()
+	createdUnit.team = 2
 	var pathToWorld = get_tree().get_root().get_node("World")
 	var randomX = rng.randf_range(-20.0, 20.0)
 	var randomY = rng.randf_range(-100.0, -50.0)
@@ -47,16 +50,16 @@ func spawnUnit(spawnPosition):
 	createdUnit.position = spawnPosition
 	
 	
-	if(Game.wood > 0):
+	if(Game.wood >= 2):
+		Game.wood -= 2
 		pathToUnits.add_child(createdUnit)
 		pathToWorld.get_units()
 		print("spawned")
 		
-func spawnUnitRanged(unitType, spawnPosition):
-	print(unitType)
+func spawnUnitRanged(spawnPosition):
 	print(spawnPosition)
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
-	var createdUnit = unitType.instantiate()
+	var createdUnit = ranged_unit.instantiate()
 	var pathToWorld = get_tree().get_root().get_node("World")
 	var randomX = rng.randf_range(-20.0, 20.0)
 	var randomY = rng.randf_range(-20.0, 20.0)
@@ -64,9 +67,28 @@ func spawnUnitRanged(unitType, spawnPosition):
 	createdUnit.position = spawnPosition
 	
 	
-	if(Game.wood > 0):
+	if(Game.wood >= 3):
+		Game.wood -= 3
 		pathToUnits.add_child(createdUnit)
 		pathToWorld.get_units()
 		print("spawned")
 		
 	
+func spawnVillager(spawnPosition):
+	var unitType = unit
+	print(spawnPosition)
+	var pathToUnits = get_tree().get_root().get_node("World/Units")
+	var createdUnit = unitType.instantiate()
+	createdUnit.team = 2
+	var pathToWorld = get_tree().get_root().get_node("World")
+	var randomX = rng.randf_range(-20.0, 20.0)
+	var randomY = rng.randf_range(-100.0, -50.0)
+	spawnPosition = spawnPosition +Vector2(randomX, randomY)
+	createdUnit.position = spawnPosition
+	
+	
+	if(Game.wood >= 1):
+		Game.wood -= 1
+		pathToUnits.add_child(createdUnit)
+		pathToWorld.get_units()
+		print("spawned")

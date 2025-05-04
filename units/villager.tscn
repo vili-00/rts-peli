@@ -1,47 +1,48 @@
-[gd_scene load_steps=20 format=3 uid="uid://cusm14sohg3t8"]
+[gd_scene load_steps=21 format=3 uid="uid://bjcv52lwnmafk"]
 
-[ext_resource type="Script" uid="uid://faho2l70wubr" path="res://units/unit.gd" id="1_ypl2c"]
-[ext_resource type="Texture2D" uid="uid://blp7jplt0daea" path="res://assets/knight_walking.png" id="2_lqx2h"]
-[ext_resource type="Texture2D" uid="uid://bene7m7pqes0f" path="res://assets/knight_walking_2.png" id="3_lqx2h"]
-[ext_resource type="Texture2D" uid="uid://dccbg67a2necy" path="res://assets/knight_walking_4.png" id="4_lvdn7"]
+[ext_resource type="Script" uid="uid://cp4jnp1tumsh6" path="res://units/villager.gd" id="1_2rjar"]
+[ext_resource type="Texture2D" uid="uid://b0t2i5msch5nc" path="res://assets/villager.png" id="2_5f8sm"]
+[ext_resource type="Texture2D" uid="uid://blp7jplt0daea" path="res://assets/knight_walking.png" id="2_6mo2y"]
+[ext_resource type="Texture2D" uid="uid://bene7m7pqes0f" path="res://assets/knight_walking_2.png" id="3_s6wvw"]
+[ext_resource type="Texture2D" uid="uid://dccbg67a2necy" path="res://assets/knight_walking_4.png" id="4_kcboq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d172s"]
-size = Vector2(33.25, 40.375)
+size = Vector2(22.625, 13.0938)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvdn7"]
-atlas = ExtResource("2_lqx2h")
+atlas = ExtResource("2_6mo2y")
 region = Rect2(0, 0, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d172s"]
-atlas = ExtResource("2_lqx2h")
+atlas = ExtResource("2_6mo2y")
 region = Rect2(490, 0, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4nis"]
-atlas = ExtResource("2_lqx2h")
+atlas = ExtResource("2_6mo2y")
 region = Rect2(0, 512, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1vr2"]
-atlas = ExtResource("2_lqx2h")
+atlas = ExtResource("2_6mo2y")
 region = Rect2(490, 512, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y23oe"]
-atlas = ExtResource("3_lqx2h")
+atlas = ExtResource("3_s6wvw")
 region = Rect2(0, 0, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6rox"]
-atlas = ExtResource("3_lqx2h")
+atlas = ExtResource("3_s6wvw")
 region = Rect2(490, 0, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rbwf3"]
-atlas = ExtResource("3_lqx2h")
+atlas = ExtResource("3_s6wvw")
 region = Rect2(0, 512, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpplu"]
-atlas = ExtResource("3_lqx2h")
+atlas = ExtResource("3_s6wvw")
 region = Rect2(490, 512, 490, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8xft0"]
-atlas = ExtResource("4_lvdn7")
+atlas = ExtResource("4_kcboq")
 region = Rect2(773, 0, 250, 341)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_186t8"]
@@ -49,6 +50,14 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5f8sm")
+}],
+"loop": true,
+"name": &"new_animation_1",
 "speed": 5.0
 }, {
 "frames": [{
@@ -106,24 +115,24 @@ border_color = Color(0.258475, 0.888637, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ciyvu"]
 radius = 41.0488
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ciyvu"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rjar"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyftx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f8sm"]
 bg_color = Color(0.968627, 0.133333, 0.0980392, 1)
 
-[node name="Unit" type="CharacterBody2D"]
-script = ExtResource("1_ypl2c")
+[node name="Villager" type="CharacterBody2D"]
+script = ExtResource("1_2rjar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -20)
+position = Vector2(0, -6.45313)
 shape = SubResource("RectangleShape2D_d172s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1.19209e-07, -26)
-scale = Vector2(0.2, 0.2)
+position = Vector2(2, -16)
+scale = Vector2(0.0539063, 0.0358398)
 sprite_frames = SubResource("SpriteFrames_186t8")
-animation = &"walking_3"
+animation = &"new_animation_1"
 
 [node name="Box" type="Panel" parent="."]
 visible = false
@@ -136,7 +145,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lvdn7")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, -13)
+position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_ciyvu")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -144,8 +153,8 @@ offset_left = -25.0
 offset_top = -62.0
 offset_right = 25.0
 offset_bottom = -55.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ciyvu")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xyftx")
+theme_override_styles/background = SubResource("StyleBoxFlat_2rjar")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5f8sm")
 show_percentage = false
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

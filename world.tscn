@@ -1,14 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://syitjs03vshp"]
+[gd_scene load_steps=14 format=3 uid="uid://syitjs03vshp"]
 
 [ext_resource type="Script" uid="uid://d0smpenwo77vp" path="res://UI/camera.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://tqocc47qf28" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cusm14sohg3t8" path="res://units/Unit.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cm521dvj54bqo" path="res://objects/tree.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://ckf3txkg403ur" path="res://objects/ore.tscn" id="5_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://dlcv6m5il8721" path="res://UI/ui.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://c74sm2vi1xmrq" path="res://objects/stone.tscn" id="5_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://mfdd2eqywgno" path="res://buildings/barracks.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://dspe8g1580nei" path="res://Global/spawn_menu.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://wa1btajymat1" path="res://Global/building_spawn_menu.tscn" id="8_ioo17"]
+[ext_resource type="PackedScene" uid="uid://c7aio7n1vdxyu" path="res://buildings/watchtower.tscn" id="9_k3n1d"]
+[ext_resource type="PackedScene" uid="uid://uf2f3fufwh4e" path="res://buildings/base.tscn" id="10_2o6r5"]
+[ext_resource type="PackedScene" uid="uid://bfjpwgtqrbami" path="res://buildings/house.tscn" id="11_70uel"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
@@ -55,6 +59,12 @@ position = Vector2(526, 179)
 [node name="Stone2" parent="Objects" instance=ExtResource("5_gbfbk")]
 position = Vector2(398, 336)
 
+[node name="Ore" parent="Objects" instance=ExtResource("5_2o6r5")]
+position = Vector2(212, 380)
+
+[node name="Ore2" parent="Objects" instance=ExtResource("5_2o6r5")]
+position = Vector2(267, 410)
+
 [node name="UI" parent="." instance=ExtResource("5_036b0")]
 
 [node name="SpawnMenu" parent="UI" instance=ExtResource("7_pkg7o")]
@@ -71,6 +81,15 @@ position = Vector2(403, 253)
 
 [node name="Barracks2" parent="Buildings" instance=ExtResource("6_dwbse")]
 position = Vector2(714, 283)
+
+[node name="Watchtower" parent="Buildings" instance=ExtResource("9_k3n1d")]
+position = Vector2(820, 432)
+
+[node name="Base" parent="Buildings" instance=ExtResource("10_2o6r5")]
+position = Vector2(394, 434)
+
+[node name="House" parent="Buildings" instance=ExtResource("11_70uel")]
+position = Vector2(217, 193)
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(575, 325.47)

@@ -7,7 +7,7 @@
 size = Vector2(14.3125, 12.75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uhnp5"]
-radius = 20.025
+radius = 34.0147
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfq2i"]
 

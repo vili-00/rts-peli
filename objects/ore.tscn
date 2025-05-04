@@ -1,21 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm521dvj54bqo"]
+[gd_scene load_steps=7 format=3 uid="uid://ckf3txkg403ur"]
 
-[ext_resource type="Script" uid="uid://dwpqitrm4u0b4" path="res://objects/tree.gd" id="1_j00qk"]
-[ext_resource type="Texture2D" uid="uid://cuf28cfodn0ud" path="res://assets/pine_tree.png" id="2_d8ko4"]
+[ext_resource type="Script" uid="uid://bv6u36puog0fd" path="res://objects/ore.gd" id="1_g6tl8"]
+[ext_resource type="Texture2D" uid="uid://c4f2cb1ijvsdn" path="res://assets/ore.png" id="2_x0tu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jelwg"]
 size = Vector2(14.3125, 12.75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uhnp5"]
-radius = 50.04
+radius = 50.3587
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfq2i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t57uo"]
 bg_color = Color(0.809686, 0.537176, 3.85046e-07, 1)
 
-[node name="Tree" type="StaticBody2D"]
-script = ExtResource("1_j00qk")
+[node name="Ore" type="StaticBody2D"]
+script = ExtResource("1_g6tl8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -27,10 +27,10 @@ shape = SubResource("RectangleShape2D_jelwg")
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_uhnp5")
 
-[node name="PineTree" type="Sprite2D" parent="."]
-position = Vector2(0, -27)
-scale = Vector2(0.07, 0.07)
-texture = ExtResource("2_d8ko4")
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, -7)
+scale = Vector2(0.0392676, 0.0331641)
+texture = ExtResource("2_x0tu7")
 
 [node name="Timer" type="Timer" parent="."]
 

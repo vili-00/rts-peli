@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7aio7n1vdxyu"]
+
+[ext_resource type="Script" uid="uid://ufjk0l0gvcrs" path="res://buildings/watchtower.gd" id="1_rceqs"]
+[ext_resource type="Texture2D" uid="uid://fug0wxrf82t1" path="res://assets/watchtower.png" id="2_o5b00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htohi"]
+size = Vector2(33, 18)
+
+[node name="Watchtower" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_rceqs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -9)
+shape = SubResource("RectangleShape2D_htohi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -40)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_o5b00")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_shape_entered" from="." to="." method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="." to="." method="_on_mouse_shape_exited"]
