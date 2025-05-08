@@ -47,6 +47,7 @@ size_flags_horizontal = 4
 text = "Connect"
 
 [node name="BackButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
 offset_right = 78.0
