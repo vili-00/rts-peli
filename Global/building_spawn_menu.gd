@@ -33,7 +33,7 @@ func _start_placing(sc: PackedScene) -> void:
 	# instantiate the ghost and make it semi-transparent
 	ghost = sc.instantiate()
 	ghost.modulate = Color(1,1,1,0.5)
-	var world = get_tree().root.get_node("World")
+	var world = get_tree().root.get_node("Player")
 	world.add_child(ghost)
 
 # Catch the next click anywhere

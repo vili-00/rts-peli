@@ -18,8 +18,9 @@ signal area_selected
 signal start_move_selection
 @onready var selectionBox = get_node("../UI/Panel")
 
-func _ready():
+func _on_ready():
 	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
+	
 func _process(delta):
 	var inputX = int(Input.is_action_pressed("Ui_Right")) - int(Input.is_action_pressed("Ui_Left"))
 	var inputY =  int(Input.is_action_pressed("Ui_Down")) - int(Input.is_action_pressed("Ui_Up"))
@@ -61,7 +62,4 @@ func draw_area(s=true):
 	pos.y = min(startV.y, endV.y)
 	selectionBox.position = pos
 	selectionBox.size *= int(s)
-	
-
-
 	

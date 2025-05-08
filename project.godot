@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Game="*res://Global/game.gd"
 SpawnMenu="*res://Global/spawn_menu.gd"
+GameManager="*res://GameManager.gd"
 
 [global_group]
 

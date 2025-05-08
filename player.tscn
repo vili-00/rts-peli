@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://jfyexnso4kre"]
+
+[ext_resource type="Script" uid="uid://qkkh7ptl1tk5" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://dspe8g1580nei" path="res://Global/spawn_menu.tscn" id="2_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://wa1btajymat1" path="res://Global/building_spawn_menu.tscn" id="3_hqtel"]
+[ext_resource type="PackedScene" uid="uid://cusm14sohg3t8" path="res://units/Unit.tscn" id="4_hqtel"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_4flbx")
+
+[node name="SpawnMenu" parent="." instance=ExtResource("2_i3pqv")]
+position = Vector2(288.92, 0)
+
+[node name="building_SpawnMenu" parent="." instance=ExtResource("3_hqtel")]
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Unit" parent="Units" instance=ExtResource("4_hqtel")]

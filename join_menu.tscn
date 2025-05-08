@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6pnphud3hw4c"]
+[gd_scene load_steps=2 format=3 uid="uid://ble31m5e117x6"]
 
-[ext_resource type="Script" uid="uid://2gtratoxttyx" path="res://join_menu.gd" id="1_xqaw6"]
+[ext_resource type="Script" uid="uid://ldvl2ql0kyny" path="res://MultiplayerController.gd" id="1_xqaw6"]
 
 [node name="join_menu" type="Control"]
 layout_mode = 3
@@ -54,4 +54,20 @@ offset_right = 78.0
 offset_bottom = 34.0
 text = "Back"
 
-[connection signal="pressed" from="BackButton" to="." method="_on_button_pressed"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://syitjs03vshp")
+spawn_path = NodePath("..")
+
+[node name="ConnectionStatus" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.125
+offset_top = 40.395
+offset_right = 203.71
+offset_bottom = 64.245
+scale = Vector2(2.40436, 2.59897)
+text = "Disconnected"
+
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/IpAddress" to="." method="_on_ip_address_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/Port" to="." method="_on_port_text_changed"]
+[connection signal="pressed" from="VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -43,7 +43,7 @@ func spawnUnit(spawnPosition):
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
 	var createdUnit = unitType.instantiate()
 	createdUnit.team = 2
-	var pathToWorld = get_tree().get_root().get_node("World")
+	var pathToWorld = get_tree().get_root().get_node("Player")
 	var randomX = rng.randf_range(-20.0, 20.0)
 	var randomY = rng.randf_range(-100.0, -50.0)
 	spawnPosition = spawnPosition +Vector2(randomX, randomY)
@@ -60,7 +60,7 @@ func spawnUnitRanged(spawnPosition):
 	print(spawnPosition)
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
 	var createdUnit = ranged_unit.instantiate()
-	var pathToWorld = get_tree().get_root().get_node("World")
+	var pathToWorld = get_tree().get_root().get_node("Player")
 	var randomX = rng.randf_range(-20.0, 20.0)
 	var randomY = rng.randf_range(-20.0, 20.0)
 	spawnPosition = spawnPosition +Vector2(randomX, randomY)
@@ -80,7 +80,7 @@ func spawnVillager(spawnPosition):
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
 	var createdUnit = unitType.instantiate()
 	createdUnit.team = 2
-	var pathToWorld = get_tree().get_root().get_node("World")
+	var pathToWorld = get_tree().get_root().get_node("Player")
 	var randomX = rng.randf_range(-20.0, 20.0)
 	var randomY = rng.randf_range(-100.0, -50.0)
 	spawnPosition = spawnPosition +Vector2(randomX, randomY)
