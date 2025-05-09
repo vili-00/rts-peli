@@ -10,6 +10,8 @@ func _ready():
 	var index = 0
 	for i in Game.players:
 		var currentPlayer = PlayerScene.instantiate()
+		currentPlayer.team = index
+		currentPlayer.id = i
 		add_child(currentPlayer)
 		for spawn in get_tree().get_nodes_in_group("PlayerSpawnPoint"):
 			if spawn.name == str(index):
