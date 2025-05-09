@@ -42,10 +42,14 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if Input.is_action_just_pressed("LeftClick"):
-		var world_pos = ghost.global_position
-		_finalize_placement(world_pos)
+		if ghost != null:
+			var world_pos = ghost.global_position
+			_finalize_placement(world_pos)
+		if ghost == null:
+			print("ghost null")
 		placing = false
 		placing_unit_type = null
+
 
 
 func _on_button_5_pressed() -> void:
@@ -68,14 +72,11 @@ func _finalize_placement(at_pos: Vector2) -> void:
 	# 2) instantiate the real unit/building
 	var inst = placing_unit_type.instantiate()
 	inst.position = at_pos  # you can still add your random offset here
-
-	# 3) parent under the right container
-	var parent_path = "Buildings" if placing_unit_type == barracks_scene else "Units"
 	
-	var container = get_tree().current_scene.get_node(parent_path)
+	var container = get_node("/root/World/Buildings")
 	container.add_child(inst)
 
 
-	# 4) reset placement state
+	# 4) reset placement statew
 	placing = false
 	placing_unit_type = null

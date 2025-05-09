@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://syitjs03vshp"]
+[gd_scene load_steps=15 format=3 uid="uid://syitjs03vshp"]
 
 [ext_resource type="Script" uid="uid://d0smpenwo77vp" path="res://UI/camera.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://tqocc47qf28" path="res://world.gd" id="1_tlwt5"]
@@ -13,9 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://c7aio7n1vdxyu" path="res://buildings/watchtower.tscn" id="9_k3n1d"]
 [ext_resource type="PackedScene" uid="uid://uf2f3fufwh4e" path="res://buildings/base.tscn" id="10_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://bfjpwgtqrbami" path="res://buildings/house.tscn" id="11_70uel"]
+[ext_resource type="PackedScene" uid="uid://cup3bhuc1yq6f" path="res://player.tscn" id="14_70uel"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
+PlayerScene = ExtResource("14_70uel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 3000.0
@@ -97,6 +99,14 @@ position = Vector2(631, 440)
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(575, 325.47)
 script = ExtResource("1_f3sb7")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cup3bhuc1yq6f")
+spawn_path = NodePath("..")
+
+[node name="1" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]
+
+[node name="0" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]
 
 [connection signal="mouse_entered" from="Buildings/Barracks" to="." method="_on_barracks_mouse_entered"]
 [connection signal="mouse_entered" from="Buildings/Barracks2" to="." method="_on_barracks_mouse_entered"]

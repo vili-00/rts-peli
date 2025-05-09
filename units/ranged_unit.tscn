@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://orrf2deo58pr"]
+[gd_scene load_steps=22 format=3 uid="uid://orrf2deo58pr"]
 
 [ext_resource type="Script" uid="uid://dbohu4trfphda" path="res://units/ranged_unit.gd" id="1_upi3n"]
 [ext_resource type="Texture2D" uid="uid://blp7jplt0daea" path="res://assets/knight_walking.png" id="2_6mo2y"]
@@ -121,6 +121,14 @@ bg_color = Color(0.111197, 0.111197, 0.111197, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgbce"]
 bg_color = Color(0.968627, 0.133333, 0.0980392, 1)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ac4il"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("ProgressBar:fill_mode")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="ranged_unit" type="CharacterBody2D"]
 script = ExtResource("1_upi3n")
 
@@ -156,6 +164,9 @@ offset_bottom = -55.0
 theme_override_styles/background = SubResource("StyleBoxFlat_ac4il")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qgbce")
 show_percentage = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ac4il")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

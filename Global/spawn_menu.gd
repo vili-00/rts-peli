@@ -34,10 +34,10 @@ func _on_button_3_pressed() -> void:
 
 
 func _on_button_4_pressed() -> void:
-	spawnUnit(buildingPosition)
+	spawnUnit(buildingPosition, 1, 1)
 
-
-func spawnUnit(spawnPosition):
+@rpc("any_peer", "reliable")
+func spawnUnit(spawnPosition, team, owner_id):
 	var unitType = unit
 	print(spawnPosition)
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
@@ -48,6 +48,8 @@ func spawnUnit(spawnPosition):
 	var randomY = rng.randf_range(-100.0, -50.0)
 	spawnPosition = spawnPosition +Vector2(randomX, randomY)
 	createdUnit.position = spawnPosition
+	#created_unit.team = team
+	#created_unit.set_multiplayer_authority(owner_id)  # Required for syncing
 	
 	
 	if(Game.wood >= 2):
