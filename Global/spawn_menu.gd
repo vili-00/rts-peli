@@ -57,7 +57,7 @@ func _on_button_4_pressed() -> void:
 		#print("spawned")
 		#
 func spawnUnitRanged(spawnPosition):
-	print(spawnPosition)
+	#print(spawnPosition)
 	var pathToUnits = get_tree().get_root().get_node("World/Units")
 	var createdUnit = ranged_unit.instantiate()
 	var pathToWorld = get_tree().get_root().get_node("World")

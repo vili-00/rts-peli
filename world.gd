@@ -10,12 +10,14 @@ func _ready():
 	var index = 0
 	for i in Game.players:
 		var currentPlayer = PlayerScene.instantiate()
-		currentPlayer.team = index
-		currentPlayer.id = i
+		#currentPlayer.team = index
+		#currentPlayer.id = i
+		
 		add_child(currentPlayer)
+		currentPlayer.init(i, index)
 		for spawn in get_tree().get_nodes_in_group("PlayerSpawnPoint"):
 			if spawn.name == str(index):
-				print(index)
+				print("player index = "+ str(index))
 				currentPlayer.global_position = spawn.global_position
 		index += 1
 	var camera : Camera2D	= $Camera
@@ -40,7 +42,7 @@ func _on_area_selected(object):
 	for u in units:
 		u.set_selected(false)
 	for u in ut:
-		print(u)
+		print("selected units = "+ str(u))
 		u.set_selected(!u.selected)
 
 func get_units_in_area(area):

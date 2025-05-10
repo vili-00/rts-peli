@@ -35,7 +35,7 @@ func _on_mouse_exited() -> void:
 func attack_loop() -> void:
 	while target_unit:
 		target_unit.health -= 10
-		print("attacking")
+		#print("attacking")
 		await get_tree().create_timer(1.0).timeout
 	attacking = false
 

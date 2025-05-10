@@ -63,6 +63,6 @@ func _on_area_2d_body_exited(body) -> void:
 func attack_loop() -> void:
 	while target_unit:
 		target_unit.health -= 3
-		print("attacking")
+		#print("attacking")
 		await get_tree().create_timer(1.0).timeout
 	attacking = false

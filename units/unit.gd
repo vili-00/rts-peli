@@ -13,6 +13,7 @@ var target_unit = null
 var health = 100
 var attacking := false 
 var team = 1
+var dying := false
 
 func _ready():
 	animated_sprite.play("walking_3")
@@ -21,9 +22,20 @@ func _ready():
 
 func _process(delta: float) -> void:
 	bar.value = health
-	if health < 1:
-		queue_free()
-		
+	# once health drops below 1, only the server should trigger the RPC:
+	if health < 1 and not dying and multiplayer.is_server():
+		dying = true
+		destroy_unit.rpc()   # broadcast to everyone (with call_local)
+
+@rpc("any_peer", "call_local", "reliable")
+func destroy_unit():
+		# 1) Grab the hidden synchronizer and disable public visibility
+	var sync = get_node_or_null("MultiplayerSynchronizer")
+	if sync:
+		sync.public_visibility = false
+	print("unit destroyed")
+	queue_free()
+	
 func set_selected(value):
 	box.visible = value
 	selected = value
@@ -47,6 +59,7 @@ func _physics_process(delta):
 		animated_sprite.stop()
 
 
+
 func _on_area_2d_body_entered(body) -> void:
 	if body.is_in_group("units") or body.is_in_group("buildings") and body != self:
 		if body.team != team:
@@ -62,6 +75,5 @@ func _on_area_2d_body_exited(body) -> void:
 func attack_loop() -> void:
 	while target_unit:
 		target_unit.health -= 10
-		print("attacking")
 		await get_tree().create_timer(1.0).timeout
 	attacking = false
