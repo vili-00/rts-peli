@@ -13,7 +13,7 @@ func _ready():
 		#currentPlayer.team = index
 		#currentPlayer.id = i
 		
-		add_child(currentPlayer)
+		add_child(currentPlayer, true)
 		currentPlayer.init(i, index)
 		for spawn in get_tree().get_nodes_in_group("PlayerSpawnPoint"):
 			if spawn.name == str(index):

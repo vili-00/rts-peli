@@ -87,10 +87,6 @@ position = Vector2(631, 440)
 offset = Vector2(575, 325.47)
 script = ExtResource("1_f3sb7")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cup3bhuc1yq6f")
-spawn_path = NodePath("..")
-
 [node name="1" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]
 
 [node name="0" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]

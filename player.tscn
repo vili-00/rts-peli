@@ -11,6 +11,7 @@ script = ExtResource("1_4flbx")
 [node name="UI" parent="." instance=ExtResource("2_hqtel")]
 
 [node name="SpawnMenu" parent="UI" instance=ExtResource("2_i3pqv")]
+visible = false
 position = Vector2(200, 500)
 
 [node name="building_SpawnMenu" parent="UI" instance=ExtResource("3_hqtel")]
