@@ -18,8 +18,8 @@ script = ExtResource("1_tlwt5")
 PlayerScene = ExtResource("14_70uel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 3000.0
-offset_bottom = 2000.0
+offset_right = 1987.0
+offset_bottom = 980.0
 scale = Vector2(1.16313, 1.45037)
 mouse_filter = 1
 color = Color(1.29953e-06, 0.545258, 9.62615e-08, 1)

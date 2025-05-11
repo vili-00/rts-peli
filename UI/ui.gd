@@ -6,9 +6,10 @@ extends CanvasLayer
 @onready var label4 = $Label4
 
 func _process(delta):
-	label.text = "Wood " + str(Game.wood)
-	label2.text = "Stone " + str(Game.stone)
-	label3.text = "Metal " + str(Game.metal)
+	pass
+	#label.text = "Wood " + str(Game.wood)
+	#label2.text = "Stone " + str(Game.stone)
+	#label3.text = "Metal " + str(Game.metal)
 	#label4.text = "Units " + str(Game.wood)
 
 	

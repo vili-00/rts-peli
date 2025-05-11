@@ -9,7 +9,7 @@ var follow_cursor = false
 var speed = 70
 var currentHealth
 
-var target_unit = null
+var target_queue = []
 var health = 100
 var attacking := false 
 var team = 1
@@ -61,19 +61,36 @@ func _physics_process(delta):
 
 
 func _on_area_2d_body_entered(body) -> void:
-	if body.is_in_group("units") or body.is_in_group("buildings") and body != self:
-		if body.team != team:
-			target_unit = body 
-			if not attacking:
-				attacking = true
-				attack_loop()
-		
-func _on_area_2d_body_exited(body) -> void:
-	if body == target_unit:
-		target_unit = null  
+	if (body.is_in_group("units") or body.is_in_group("buildings")) \
+	and body.team != team and body != self:
+# no risk of invalid refs here, 'body' is always valid
+		if not target_queue.has(body):
+			target_queue.append(body)
+		if not attacking:
+			attacking = true
+			attack_loop()
 
+func _on_area_2d_body_exited(body) -> void:
+# still valid, safe to call has()
+	if target_queue.has(body):
+		target_queue.erase(body)
+
+# make this async so you can 'await' without blocking
 func attack_loop() -> void:
-	while target_unit:
-		target_unit.health -= 10
-		await get_tree().create_timer(1.0).timeout
+	while target_queue.size() > 0:
+# pop the next target *before* doing any validity checks
+		var target = target_queue[0]
+		target_queue.remove_at(0)
+
+# skip right away if it’s already freed or otherwise dead
+		if not is_instance_valid(target) or target.health <= 0:
+			continue
+
+# now do your per‐target attack
+		while is_instance_valid(target) and target.health > 0:
+			target.health -= 10
+			# play attack animation here if you want…
+			await get_tree().create_timer(1.0).timeout
+			# when this loop exits, target is either invalid or dead;
+			# the next iteration will pull the next queued target.
 	attacking = false

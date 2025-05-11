@@ -1,7 +1,7 @@
 extends Node
 
 var players = {}
-var wood = 10
+var wood = 0
 var stone = 0
 var metal = 0
 var base_destroyed = 0

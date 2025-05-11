@@ -38,7 +38,10 @@ func notify_server_of_player_info(name: String, id: int):
 		Game.players[id] = {
 			"name": name,
 			"id": id,
-			"score": 0
+			"score": 0,
+			"wood":  10,   # default starting resources
+			"stone": 0,
+			"metal": 0
 		}
 
 		print("Registered new player:", name, id)

@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bene7m7pqes0f" path="res://assets/knight_walking_2.png" id="3_s6wvw"]
 [ext_resource type="Texture2D" uid="uid://dccbg67a2necy" path="res://assets/knight_walking_4.png" id="4_kcboq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d172s"]
-size = Vector2(13, 8.1875)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ac4il"]
+radius = 4.12311
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvdn7"]
 atlas = ExtResource("2_6mo2y")
@@ -133,8 +133,9 @@ properties/1/replication_mode = 1
 script = ExtResource("1_upi3n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -3.90625)
-shape = SubResource("RectangleShape2D_d172s")
+position = Vector2(0, -2)
+rotation = 0.0639829
+shape = SubResource("CircleShape2D_ac4il")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3.47386, -18.0744)
