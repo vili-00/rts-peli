@@ -9,7 +9,7 @@ var health = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawnMenu = get_node("/root/SpawnMenu")
+	#spawnMenu = get_node("/root/SpawnMenu")
 	bar.max_value = health
 
 
@@ -27,7 +27,7 @@ func _on_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> v
 			if selection:
 				#spawnMenu.showMenu(position)
 				print("mouseovelap spawn units")
-				spawnMenu.spawnUnit(position)
+				#spawnMenu.spawnUnit(position)
 				
 		if !mouseOvelap:
 			selection = false
