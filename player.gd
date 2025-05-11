@@ -13,10 +13,7 @@ var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	#if multiplayer.get_unique_id() == id:
-		#$UI/SpawnMenu.connect("spawn_requested", _on_spawn_requested)
-		#print("player ready ")
-		#print(id)
+
 
 	
 func init(p_id: int, p_team: int):
