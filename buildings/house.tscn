@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfjpwgtqrbami"]
+[gd_scene load_steps=7 format=3 uid="uid://bfjpwgtqrbami"]
 
 [ext_resource type="Script" uid="uid://di60bw2bwsbtw" path="res://buildings/house.gd" id="1_j2dgx"]
 [ext_resource type="Texture2D" uid="uid://nc61unppthoy" path="res://assets/house.png" id="2_pv5vd"]
@@ -11,6 +11,11 @@ bg_color = Color(0.111197, 0.111197, 0.111197, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv5vd"]
 bg_color = Color(0, 0.483338, 0.854956, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_j2dgx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="House" type="StaticBody2D"]
 input_pickable = true
@@ -33,6 +38,9 @@ offset_bottom = -83.0
 theme_override_styles/background = SubResource("StyleBoxFlat_j2dgx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_pv5vd")
 show_percentage = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_j2dgx")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
