@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://c74sm2vi1xmrq"]
+
+[ext_resource type="Script" uid="uid://mjm372sfb5qu" path="res://objects/stone.gd" id="1_1hiip"]
+[ext_resource type="Texture2D" uid="uid://db3vi8sat40no" path="res://assets/rock.png" id="2_1hiip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jelwg"]
+size = Vector2(14.3125, 12.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhnp5"]
+radius = 34.0147
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfq2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t57uo"]
+bg_color = Color(0.809686, 0.537176, 3.85046e-07, 1)
+
+[node name="Stone" type="StaticBody2D"]
+script = ExtResource("1_1hiip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_jelwg")
+
+[node name="chopArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chopArea"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_uhnp5")
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, -7)
+scale = Vector2(0.0392676, 0.0331641)
+texture = ExtResource("2_1hiip")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -14.0
+offset_top = -63.0
+offset_right = 14.0
+offset_bottom = -57.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vfq2i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t57uo")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[connection signal="body_entered" from="chopArea" to="." method="_on_chop_area_body_entered"]
+[connection signal="body_exited" from="chopArea" to="." method="_on_chop_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

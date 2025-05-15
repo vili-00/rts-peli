@@ -1,0 +1,173 @@
+[gd_scene load_steps=22 format=3 uid="uid://bjcv52lwnmafk"]
+
+[ext_resource type="Script" uid="uid://cp4jnp1tumsh6" path="res://units/villager.gd" id="1_2rjar"]
+[ext_resource type="Texture2D" uid="uid://b0t2i5msch5nc" path="res://assets/villager.png" id="2_5f8sm"]
+[ext_resource type="Texture2D" uid="uid://blp7jplt0daea" path="res://assets/knight_walking.png" id="2_6mo2y"]
+[ext_resource type="Texture2D" uid="uid://bene7m7pqes0f" path="res://assets/knight_walking_2.png" id="3_s6wvw"]
+[ext_resource type="Texture2D" uid="uid://dccbg67a2necy" path="res://assets/knight_walking_4.png" id="4_kcboq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2rjar"]
+radius = 3.04944
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvdn7"]
+atlas = ExtResource("2_6mo2y")
+region = Rect2(0, 0, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d172s"]
+atlas = ExtResource("2_6mo2y")
+region = Rect2(490, 0, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4nis"]
+atlas = ExtResource("2_6mo2y")
+region = Rect2(0, 512, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1vr2"]
+atlas = ExtResource("2_6mo2y")
+region = Rect2(490, 512, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y23oe"]
+atlas = ExtResource("3_s6wvw")
+region = Rect2(0, 0, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6rox"]
+atlas = ExtResource("3_s6wvw")
+region = Rect2(490, 0, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbwf3"]
+atlas = ExtResource("3_s6wvw")
+region = Rect2(0, 512, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpplu"]
+atlas = ExtResource("3_s6wvw")
+region = Rect2(490, 512, 490, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xft0"]
+atlas = ExtResource("4_kcboq")
+region = Rect2(773, 0, 250, 341)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_186t8"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5f8sm")
+}],
+"loop": true,
+"name": &"new_animation_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvdn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d172s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4nis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1vr2")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y23oe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6rox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbwf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpplu")
+}],
+"loop": true,
+"name": &"walking_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xft0")
+}],
+"loop": true,
+"name": &"walking_3",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvdn7"]
+bg_color = Color(0.0745098, 0.643137, 0.901961, 0)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.258475, 0.888637, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ciyvu"]
+radius = 41.0488
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rjar"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f8sm"]
+bg_color = Color(0.968627, 0.133333, 0.0980392, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2rjar"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("ProgressBar:value")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Villager" type="CharacterBody2D"]
+script = ExtResource("1_2rjar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_2rjar")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -16)
+scale = Vector2(0.0539063, 0.0358398)
+sprite_frames = SubResource("SpriteFrames_186t8")
+animation = &"new_animation_1"
+
+[node name="Box" type="Panel" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -51.0
+offset_right = 24.0
+offset_bottom = 6.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvdn7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_ciyvu")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -62.0
+offset_right = 25.0
+offset_bottom = -55.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2rjar")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5f8sm")
+show_percentage = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2rjar")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

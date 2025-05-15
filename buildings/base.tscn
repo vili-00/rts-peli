@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://uf2f3fufwh4e"]
+
+[ext_resource type="Script" uid="uid://13jsw04t3euh" path="res://buildings/base.gd" id="1_so3h3"]
+[ext_resource type="Texture2D" uid="uid://7uisdvhqboeh" path="res://assets/castle.png" id="2_2liin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htohi"]
+size = Vector2(82, 31)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_so3h3"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2liin"]
+bg_color = Color(0, 0.483338, 0.854956, 1)
+
+[node name="Base" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_so3h3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_htohi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -35)
+scale = Vector2(0.104688, 0.104688)
+texture = ExtResource("2_2liin")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -70.0
+offset_right = 25.0
+offset_bottom = -63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_so3h3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2liin")
+show_percentage = false
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_shape_entered" from="." to="." method="_on_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="." to="." method="_on_mouse_shape_exited"]
