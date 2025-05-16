@@ -40,6 +40,14 @@ func startChopping():
 	bar.show()
 
 @rpc("any_peer", "call_local", "reliable")
-func treeChopped():
-	Game.stone += 1
+func removeTree():
+	var sync = get_node_or_null("MultiplayerSynchronizer")
+	if sync:
+		sync.public_visibility = false
 	queue_free()
+
+func treeChopped():
+	var id = multiplayer.get_unique_id()
+	var p = Game.players[id]
+	p["stone"]+=1
+	rpc("removeTree")

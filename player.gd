@@ -1,5 +1,4 @@
 extends Node2D
-
 var units = []
 var id : int
 var team : int
@@ -118,7 +117,7 @@ func get_units():
 		units = get_tree().get_nodes_in_group("units1")
 	else:
 		units = get_tree().get_nodes_in_group("units0")
-	
+
 	"""
 	if multiplayer.is_server():
 		created_unit.position = get_node("../1/Units").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))

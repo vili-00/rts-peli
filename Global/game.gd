@@ -1,6 +1,7 @@
 extends Node
 
 var players = {}
+var player = null
 var wood = 0
 var stone = 0
 var metal = 0
