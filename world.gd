@@ -7,6 +7,8 @@ var units = []
 func _ready():
 	#get_units()
 	#print(units)
+	$"0/Base0".team = 1
+	$"1/Base1".team = 0
 	var index = 0
 	for i in Game.players:
 		var currentPlayer = PlayerScene.instantiate()
@@ -22,8 +24,8 @@ func _ready():
 		index += 1
 	var camera : Camera2D	= $Camera
 	if !multiplayer.is_server():
-		camera.position.x = get_tree().get_root().get_node("World/0/Base").position.x
-		camera.position.y = get_tree().get_root().get_node("World/0/Base").position.y
+		camera.position.x = get_tree().get_root().get_node("World/0/Base0").position.x
+		camera.position.y = get_tree().get_root().get_node("World/0/Base0").position.y
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

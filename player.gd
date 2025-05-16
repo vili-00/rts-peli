@@ -49,9 +49,9 @@ func _process(delta):
 func _on_spawn_requested(unit_type: String):
 	var spawn_pos = 0
 	if multiplayer.is_server():
-		spawn_pos = get_tree().get_root().get_node("World/1/Base").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
+		spawn_pos = get_tree().get_root().get_node("World/1/Base1").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
 	else:
-		spawn_pos = get_tree().get_root().get_node("World/0/Base").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
+		spawn_pos = get_tree().get_root().get_node("World/0/Base0").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
 	spawn_unit.rpc(spawn_pos, team, id, unit_type)
 
 @rpc("any_peer", "call_local", "reliable")

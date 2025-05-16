@@ -130,15 +130,15 @@ y_sort_enabled = true
 
 [node name="1" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]
 
-[node name="Base" parent="1" groups=["buildings"] instance=ExtResource("10_2o6r5")]
+[node name="Base1" parent="1" groups=["buildings"] instance=ExtResource("10_2o6r5")]
 position = Vector2(183, 276)
 
 [node name="Units" type="Node2D" parent="1"]
 
 [node name="0" parent="." groups=["PlayerSpawnPoint"] instance=ExtResource("14_70uel")]
 
-[node name="Base" parent="0" groups=["buildings"] instance=ExtResource("10_2o6r5")]
-position = Vector2(2119, 1247)
+[node name="Base0" parent="0" groups=["buildings"] instance=ExtResource("10_2o6r5")]
+position = Vector2(2121, 1243)
 
 [node name="Units" type="Node2D" parent="0"]
 

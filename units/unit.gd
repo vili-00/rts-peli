@@ -1,11 +1,13 @@
 class_name Unit
 extends CharacterBody2D
 
+
 @export var selected = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var box = get_node("Box")
-@onready var target = position
+@onready var targetposition = position
 @onready var bar = $ProgressBar
+@onready var hitbox : Area2D = $Area2D
 var follow_cursor = false
 var speed = 70
 var currentHealth
@@ -53,10 +55,10 @@ func _input(event):
 func _physics_process(delta):
 	if follow_cursor == true:
 		if selected:
-			target = get_global_mouse_position()
+			targetposition = get_global_mouse_position()
 			animated_sprite.play("walking_3")
-	velocity = position.direction_to(target) *speed
-	if position.distance_to(target) > 40:
+	velocity = position.direction_to(targetposition) *speed
+	if position.distance_to(targetposition) > 40:
 		move_and_slide()
 	else:
 		animated_sprite.stop()
@@ -88,21 +90,25 @@ func _on_area_2d_body_exited(body) -> void:
 		target_queue.erase(body)
 
 # make this async so you can 'await' without blocking
+@rpc("any_peer", "call_local", "reliable")
 func attack_loop() -> void:
 	while target_queue.size() > 0:
-# pop the next target *before* doing any validity checks
-		var target = target_queue[0]
-		target_queue.remove_at(0)
+		# Pop the next candidate
+		var target = target_queue.pop_front()
 
-# skip right away if it’s already freed or otherwise dead
+		# Skip if it’s no longer valid or already dead
 		if not is_instance_valid(target) or target.health <= 0:
 			continue
 
-# now do your per‐target attack
-		while is_instance_valid(target) and target.health > 0:
+		# While it’s still alive AND still inside our area…
+		while is_instance_valid(target) \
+		and target.health > 0 \
+		and hitbox.overlaps_body(target):
 			target.health -= 10
-			# play attack animation here if you want…
+			print("attacking ", target.name)
 			await get_tree().create_timer(1.0).timeout
-			# when this loop exits, target is either invalid or dead;
-			# the next iteration will pull the next queued target.
-	attacking = false
+
+			# as soon as they die or exit, this inner loop ends
+			# then the outer loop pops the next queued target
+			# no more targets
+			attacking = false
