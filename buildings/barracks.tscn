@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://mfdd2eqywgno"]
+[gd_scene load_steps=6 format=3 uid="uid://mfdd2eqywgno"]
 
 [ext_resource type="Script" uid="uid://oelem17y375q" path="res://buildings/barracks.gd" id="1_p1778"]
 [ext_resource type="Texture2D" uid="uid://7i2ll34lyh0u" path="res://assets/barracks.png" id="2_chnri"]
@@ -11,14 +11,6 @@ bg_color = Color(0.111197, 0.111197, 0.111197, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chnri"]
 bg_color = Color(0, 0.483338, 0.854956, 1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p1778"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("ProgressBar:value")
-properties/1/spawn = true
-properties/1/replication_mode = 1
 
 [node name="Barracks" type="StaticBody2D"]
 input_pickable = true
@@ -41,9 +33,6 @@ offset_bottom = -69.0
 theme_override_styles/background = SubResource("StyleBoxFlat_p1778")
 theme_override_styles/fill = SubResource("StyleBoxFlat_chnri")
 show_percentage = false
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_p1778")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

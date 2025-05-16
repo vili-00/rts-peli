@@ -22,11 +22,16 @@ func _ready():
 	bar.max_value = health
 
 func _process(delta: float) -> void:
+	rpc("update_health", health)
 	bar.value = health
 	# once health drops below 1, only the server should trigger the RPC:
-	if health < 1 and not dying and multiplayer.is_server():
+	if health < 1 and not dying:
 		dying = true
 		destroy_unit.rpc()   # broadcast to everyone (with call_local)
+
+@rpc("any_peer", "call_local", "reliable")
+func update_health(new_health: int):
+	health = new_health
 
 @rpc("any_peer", "call_local", "reliable")
 func destroy_unit():
