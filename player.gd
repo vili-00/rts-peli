@@ -71,11 +71,15 @@ func spawn_unit(spawn_pos: Vector2, team: int, owner_id: int, unit_type: String)
 	created_unit.set_multiplayer_authority(owner_id)
 	created_unit.position = spawn_pos
 	if owner_id == 1:
-		created_unit.add_to_group("units1", true)
-		get_tree().get_root().get_node("World/1/Units/").add_child(created_unit)
+		if p["wood"] > 0:
+			p["wood"] -= 1
+			created_unit.add_to_group("units1", true)
+			get_tree().get_root().get_node("World/1/Units/").add_child(created_unit)
 	else: 
-		created_unit.add_to_group("units0", true)
-		get_tree().get_root().get_node("World/0/Units/").add_child(created_unit)
+		if p["wood"] > 0:
+			p["wood"] -= 1
+			created_unit.add_to_group("units0", true)
+			get_tree().get_root().get_node("World/0/Units/").add_child(created_unit)
 		
 		
 
