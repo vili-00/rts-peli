@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cup3bhuc1yq6f"]
+[gd_scene load_steps=6 format=3 uid="uid://cup3bhuc1yq6f"]
 
 [ext_resource type="Script" uid="uid://qkkh7ptl1tk5" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://dlcv6m5il8721" path="res://UI/ui.tscn" id="2_hqtel"]
 [ext_resource type="PackedScene" uid="uid://dspe8g1580nei" path="res://Global/spawn_menu.tscn" id="2_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://wa1btajymat1" path="res://Global/building_spawn_menu.tscn" id="3_hqtel"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hqtel"]
+font_size = 60
+font_color = Color(0.00392157, 0.388235, 1, 1)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_4flbx")
@@ -50,3 +54,10 @@ offset_bottom = 24.0
 offset_left = 793.0
 offset_right = 833.0
 offset_bottom = 23.0
+
+[node name="Label11" type="Label" parent="UI"]
+offset_left = 415.0
+offset_top = 279.0
+offset_right = 455.0
+offset_bottom = 302.0
+label_settings = SubResource("LabelSettings_hqtel")

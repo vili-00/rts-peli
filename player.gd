@@ -9,8 +9,9 @@ var rng = RandomNumberGenerator.new()
 @onready var label4 = $UI/Label8
 @onready var label5 = $UI/Label9
 @onready var label6 = $UI/Label10
+@onready var label7 = $UI/Label11
 
-var time_left = 10000# seconds remaining
+var time_left
 var countdown_timer : Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,8 +55,11 @@ func _process(delta):
 	var count1 = get_tree().get_nodes_in_group("units1").size()
 	# show both in Label5
 	label5.text = "Player 1 score: %d   Player 2 score: %d" % [count0, count1]
-	time_left -= delta
+	time_left = Game.time_left
 	label6.text = "Time left: %d " % time_left
+	if Game.base_destroyed != 0:
+		label7.show()
+		label7.text = "Winner is Player: %d " % Game.base_destroyed
 
 		
 func _on_spawn_requested(unit_type: String):

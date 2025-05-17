@@ -82,6 +82,7 @@ func StartGame():
 	print("Game starting")
 	var scene = load("res://world.tscn").instantiate()
 	get_tree().root.add_child(scene)
+	Game.time_left = 600
 	self.hide()
 
 func _on_host_button_pressed() -> void:
