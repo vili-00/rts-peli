@@ -63,11 +63,27 @@ func _process(delta):
 
 		
 func _on_spawn_requested(unit_type: String):
-	var spawn_pos = 0
-	if multiplayer.is_server():
-		spawn_pos = get_tree().get_root().get_node("World/1/Base1").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
+	var spawn_pos: Vector2
+
+	# first try your team’s buildings:
+	var team_buildings = get_team_buildings(team)
+	if team_buildings.size() > 0:
+		# pick one at random
+		var bld = team_buildings[rng.randi_range(0, team_buildings.size() - 1)]
+		spawn_pos = bld.position + Vector2(
+			rng.randf_range(-20, 20),
+			rng.randf_range(-100, -50)
+		)
 	else:
-		spawn_pos = get_tree().get_root().get_node("World/0/Base0").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
+		# fallback to base
+		var base_path = "/root/World/%d/Base%d" % [team, team]
+		var base = get_tree().get_root().get_node(base_path)
+		spawn_pos = base.position + Vector2(
+			rng.randf_range(-20, 20),
+			rng.randf_range(-100, -50)
+		)
+
+	# now hand off to multiplayer
 	spawn_unit.rpc(spawn_pos, team, id, unit_type)
 
 @rpc("any_peer", "call_local", "reliable")
@@ -136,5 +152,11 @@ func get_units():
 		units = get_tree().get_nodes_in_group("units0")
 
 
-	
+func get_team_buildings(team_id: int) -> Array:
+	var out := []
+	# assume every building instance has been added to the "buildings" group
+	for b in get_tree().get_nodes_in_group("buildings"):
+		if b.team == team_id:
+			out.append(b)
+	return out
 	
