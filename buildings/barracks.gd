@@ -11,6 +11,7 @@ var health = 200
 func _ready() -> void:
 	#spawnMenu = get_node("/root/SpawnMenu")
 	bar.max_value = health
+	add_to_group("buildings", true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

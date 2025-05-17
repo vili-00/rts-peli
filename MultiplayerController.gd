@@ -42,7 +42,8 @@ func notify_server_of_player_info(name: String, id: int):
 			"score": 0,
 			"wood":  10,   # default starting resources
 			"stone": 0,
-			"metal": 0
+			"metal": 0,
+			"team": 3
 		}
 
 		print("Registered new player:", name, id)
@@ -124,18 +125,20 @@ func _on_port_text_changed(new_text: String) -> void:
 
 
 # 1) Client calls this to ask the server to place a building
-func request_building_placement(building_path: String, pos: Vector2) -> void:
-	rpc_id(1, "_rpc_request_place_building", building_path, pos)
+func request_building_placement(building_path: String, pos: Vector2, team:int) -> void:
+	rpc_id(1, "_rpc_request_place_building", building_path, pos, team)
 
 # 2) Runs *only* on the server (authority).  It then broadcasts to all peers:
 @rpc("any_peer", "call_local", "reliable")
-func _rpc_request_place_building(building_path: String, pos: Vector2) -> void:
-	rpc("broadcast_building_placement", building_path, pos)
+func _rpc_request_place_building(building_path: String, pos: Vector2, team:int) -> void:
+	rpc("broadcast_building_placement", building_path, pos, team)
 
 # 3) Runs on *every* peer (including the server) — actually does the instantiation
 @rpc("any_peer", "call_local", "reliable")
-func broadcast_building_placement(building_path: String, pos: Vector2) -> void:
+func broadcast_building_placement(building_path: String, pos: Vector2, team:int) -> void:
 	var inst = load(building_path).instantiate()
 	inst.position = pos
+	inst.team = team
+
 	# make sure your scene’s root node is really named “World”
 	get_node("/root/World/Buildings").add_child(inst)

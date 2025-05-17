@@ -75,7 +75,9 @@ func _finalize_placement(at_pos: Vector2) -> void:
 
 	# 3) ask the network controller to do the rest
 	#    (uses rpc_id() under the hood)
-	MultiplayerController.request_building_placement(building_path, at_pos)
+	var my_id   = multiplayer.get_unique_id()
+	var my_team = Game.players[my_id].team
+	MultiplayerController.request_building_placement(building_path, at_pos, my_team)
 
 	# 4) clean up your ghost & local state
 	if ghost:

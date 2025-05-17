@@ -18,6 +18,7 @@ func _ready():
 func init(p_id: int, p_team: int):
 	id = p_id
 	team = p_team
+	Game.players[id]["team"] = team
 	await get_tree().process_frame  # ✅ ensures node is fully in tree
 	var mp = get_tree().get_multiplayer()
 	if multiplayer.get_unique_id() == id:
