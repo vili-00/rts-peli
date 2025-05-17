@@ -62,21 +62,23 @@ func _on_button_7_pressed() -> void:
 	_start_placing(barracks_scene)
 	placing_unit_type = barracks_scene
 	placing = true
+	# Notify multiplayer system about building selection
 
 func _finalize_placement(at_pos: Vector2) -> void:
-	# 1) remove the ghost
+	# 1) sanity check
+	if not placing_unit_type:
+		push_warning("No building selected!")
+		return
+
+	# 2) grab the path
+	var building_path = placing_unit_type.resource_path
+
+	# 3) ask the network controller to do the rest
+	#    (uses rpc_id() under the hood)
+	MultiplayerController.request_building_placement(building_path, at_pos)
+
+	# 4) clean up your ghost & local state
 	if ghost:
 		ghost.queue_free()
 		ghost = null
-
-	# 2) instantiate the real unit/building
-	var inst = placing_unit_type.instantiate()
-	inst.position = at_pos  # you can still add your random offset here
-	
-	var container = get_node("/root/World/Buildings")
-	container.add_child(inst)
-
-
-	# 4) reset placement statew
-	placing = false
 	placing_unit_type = null

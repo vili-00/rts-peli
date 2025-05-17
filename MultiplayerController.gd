@@ -25,7 +25,8 @@ func peer_disconnected(id):
 	#SendPlayerInformation.rpc_id(1, $VBoxContainer/Name.text, multiplayer.get_unique_id())
 func connected_to_server():
 	print("Connected to server")
-	var my_name = $VBoxContainer/Name.text
+	#var my_name = $VBoxContainer/Name.text
+	var my_name =get_tree().root.get_node("host_menu/VBoxContainer/Name").text
 	var my_id = multiplayer.get_unique_id()
 	notify_server_of_player_info.rpc_id(1, my_name, my_id)
 
@@ -119,3 +120,22 @@ func _on_ip_address_text_changed(new_text: String) -> void:
 
 func _on_port_text_changed(new_text: String) -> void:
 	port = new_text
+
+
+
+# 1) Client calls this to ask the server to place a building
+func request_building_placement(building_path: String, pos: Vector2) -> void:
+	rpc_id(1, "_rpc_request_place_building", building_path, pos)
+
+# 2) Runs *only* on the server (authority).  It then broadcasts to all peers:
+@rpc("any_peer", "call_local", "reliable")
+func _rpc_request_place_building(building_path: String, pos: Vector2) -> void:
+	rpc("broadcast_building_placement", building_path, pos)
+
+# 3) Runs on *every* peer (including the server) — actually does the instantiation
+@rpc("any_peer", "call_local", "reliable")
+func broadcast_building_placement(building_path: String, pos: Vector2) -> void:
+	var inst = load(building_path).instantiate()
+	inst.position = pos
+	# make sure your scene’s root node is really named “World”
+	get_node("/root/World/Buildings").add_child(inst)

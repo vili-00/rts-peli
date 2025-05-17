@@ -118,20 +118,6 @@ func get_units():
 	else:
 		units = get_tree().get_nodes_in_group("units0")
 
-	"""
-	if multiplayer.is_server():
-		created_unit.position = get_node("../1/Units").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
-		if p["wood"] > 0:
-			p["wood"] -= 1
-			get_tree().get_root().get_node("World/1/Units/").add_child(created_unit)
-			print("spawned %s by player %d on team %d" % [unit_type, owner_id, team])
-	else:
-		created_unit.position = get_node("../0/Units").position + Vector2(rng.randf_range(-20, 20), rng.randf_range(-100, -50))
-		# Still add to scene for sync
-		if p["wood"] > 0:
-			p["wood"] -= 1
-			get_tree().get_root().get_node("World/0/Units/").add_child(created_unit)
-			print("spawned %s by player %d on team %d" % [unit_type, owner_id, team])
-	"""
+
 	
 	
