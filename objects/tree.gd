@@ -49,6 +49,6 @@ func removeTree():
 func treeChopped():
 	var id = multiplayer.get_unique_id()
 	var p = Game.players[id]
-	p["wood"]+=1
+	p["wood"]+=5
 	rpc("removeTree")
 	
