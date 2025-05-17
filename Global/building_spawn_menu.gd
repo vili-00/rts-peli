@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var soldier_scene = preload("res://units/Unit.tscn")
+@onready var watchtower_scene = preload("res://buildings/watchtower.tscn")
 @onready var barracks_scene = preload("res://buildings/Barracks.tscn")
 var rng = RandomNumberGenerator.new()
 
@@ -53,8 +53,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_button_5_pressed() -> void:
-	#visible = false      # hide menu
-	placing_unit_type = soldier_scene
+	_start_placing(watchtower_scene)
+	placing_unit_type = watchtower_scene
+	placing = true
 	placing = true
 
 
@@ -72,7 +73,8 @@ func _finalize_placement(at_pos: Vector2) -> void:
 
 	# 2) grab the path
 	var building_path = placing_unit_type.resource_path
-
+	print("buidling path ")
+	print(building_path)
 	# 3) ask the network controller to do the rest
 	#    (uses rpc_id() under the hood)
 	var my_id   = multiplayer.get_unique_id()
