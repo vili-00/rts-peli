@@ -7,8 +7,11 @@ var rng = RandomNumberGenerator.new()
 @onready var label2 = $UI/Label6
 @onready var label3 = $UI/Label7
 @onready var label4 = $UI/Label8
+@onready var label5 = $UI/Label9
+@onready var label6 = $UI/Label10
 
-
+var time_left = 10000# seconds remaining
+var countdown_timer : Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_units()
@@ -38,6 +41,7 @@ func init(p_id: int, p_team: int):
 		label4.hide()
 		$UI/SpawnMenu.hide()
 		$UI/building_SpawnMenu.hide()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Game.players.has(id):
@@ -45,6 +49,14 @@ func _process(delta):
 		label .text = "Wood:  %d" % p["wood"]
 		label2.text = "Stone: %d" % p["stone"]
 		label3.text = "Metal: %d" % p["metal"]
+			# count each group
+	var count0 = get_tree().get_nodes_in_group("units0").size()
+	var count1 = get_tree().get_nodes_in_group("units1").size()
+	# show both in Label5
+	label5.text = "Player 1 score: %d   Player 2 score: %d" % [count0, count1]
+	time_left -= delta
+	label6.text = "Time left: %d " % time_left
+
 		
 func _on_spawn_requested(unit_type: String):
 	var spawn_pos = 0

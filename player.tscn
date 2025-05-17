@@ -36,7 +36,17 @@ offset_right = 240.0
 offset_bottom = 23.0
 
 [node name="Label8" type="Label" parent="UI"]
-visible = false
 offset_left = 300.0
 offset_right = 340.0
+offset_bottom = 23.0
+
+[node name="Label9" type="Label" parent="UI"]
+offset_left = 477.0
+offset_top = 1.0
+offset_right = 517.0
+offset_bottom = 24.0
+
+[node name="Label10" type="Label" parent="UI"]
+offset_left = 793.0
+offset_right = 833.0
 offset_bottom = 23.0
