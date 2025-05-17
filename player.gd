@@ -1,7 +1,11 @@
 extends Node2D
 
 const SPAWN_INTERVAL := 5.0
-
+const UNIT_COSTS := {
+	"melee":   {"wood": 1, "stone": 1, "metal": 0},
+	"ranged":  {"wood": 0, "stone": 0, "metal": 1},
+	"villager":{"wood": 1, "stone": 0, "metal": 0},
+}
 var units = []
 var id : int
 var team : int
@@ -106,11 +110,28 @@ func _on_spawn_requested(unit_type: String):
 @rpc("any_peer", "call_local", "reliable")
 func spawn_unit(spawn_pos: Vector2, team: int, owner_id: int, unit_type: String):
 	var unit_scene: PackedScene
-	var p = Game.players[id]
+
+	# --- NEW: look up cost and check/subtract all resources upfront ---
+	var cost = UNIT_COSTS.get(unit_type)
+	if cost == null:
+		push_error("spawn_unit: unknown unit_type '%s'" % unit_type)
+		return
+
+	var p = Game.players[owner_id]
+	# affordability check
+	for res in cost.keys():
+		if p[res] < cost[res]:
+			push_warning("Not enough %s to spawn %s" % [res, unit_type])
+			return
+	# subtract cost
+	for res in cost.keys():
+		p[res] -= cost[res]
+		# --- end NEW cost logic ---
+
 	match unit_type:
-		"melee":   unit_scene = preload("res://units/Unit.tscn")
-		"ranged":  unit_scene = preload("res://units/ranged_unit.tscn")
-		"villager":unit_scene = preload("res://units/villager.tscn")
+		"melee":    unit_scene = preload("res://units/Unit.tscn")
+		"ranged":   unit_scene = preload("res://units/ranged_unit.tscn")
+		"villager": unit_scene = preload("res://units/villager.tscn")
 		_: return
 
 	var created_unit = unit_scene.instantiate()
@@ -118,18 +139,13 @@ func spawn_unit(spawn_pos: Vector2, team: int, owner_id: int, unit_type: String)
 	created_unit.set_multiplayer_authority(owner_id)
 	created_unit.position = spawn_pos
 
+	# now just add to group & parent (no more per-branch resource logic)
 	if owner_id == 1:
-		if p["wood"] > 0:
-			p["wood"] -= 1
-			created_unit.add_to_group("units1", true)
-			get_tree().get_root().get_node("World/1/Units/").add_child(created_unit)
-	else: 
-		if p["wood"] > 0:
-			p["wood"] -= 1
-			created_unit.add_to_group("units0", true)
-			get_tree().get_root().get_node("World/0/Units/").add_child(created_unit)
-	
-	
+		created_unit.add_to_group("units1", true)
+		get_tree().get_root().get_node("World/1/Units").add_child(created_unit)
+	else:
+		created_unit.add_to_group("units0", true)
+		get_tree().get_root().get_node("World/0/Units").add_child(created_unit)
 
 func _on_area_selected(object):
 	get_units()

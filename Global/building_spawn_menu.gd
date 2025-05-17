@@ -79,7 +79,10 @@ func _finalize_placement(at_pos: Vector2) -> void:
 	#    (uses rpc_id() under the hood)
 	var my_id   = multiplayer.get_unique_id()
 	var my_team = Game.players[my_id].team
-	MultiplayerController.request_building_placement(building_path, at_pos, my_team)
+	var p = Game.players[my_id]
+	if p["stone"] > 1:
+		p["stone"] -= 2
+		MultiplayerController.request_building_placement(building_path, at_pos, my_team)
 
 	# 4) clean up your ghost & local state
 	if ghost:
